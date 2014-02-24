@@ -3,8 +3,9 @@ surespot.me
 This is my proposal for a new, more structured [surespot.me](http://surespot.me) website.
 
 ## Technology
-* jQuery 1.10.2
-* Bootstrap 3.0.3
+* [jQuery](http://jquery.com) 1.10.2
+* [Bootstrap](http://getbootstrap.com) 3.0.3
+* [FontAwesome](http://fontawesome.io) 4.0.3
 * based on [Flatty](http://www.blacktie.co/2013/12/flatty-app-landing-page/)
 
 ## Stuff implemented that wasn't there before
