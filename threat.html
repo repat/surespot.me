@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="surespot is an encrypted messenger app for Android and iOS" />
+    <meta name="author" content="surespot" />
+    <meta name="keywords" content="surespot,encrypted,messenger,app,ios,android"  />
+    <meta name="robots" content="index, follow">
+
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>surespot encrypted messenger</title>
+
+    <!-- OpenGraph -->
+    <meta property="og:image" content="http://surespot.me/assets/img/surespot_logo_web.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="surespot Apps"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://surespot.me"/>
+    <meta property="og:site_name" content="surespot encrypted messenger"/>
+    <meta property="og:description" content="surespot is an encrypted messenger app for Android and iOS"/>
+
+    <!-- Bootstrap core and FontAwesome CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img src="assets/img/surespot_icon.png" alt="surespot icon"/> Surespot</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="legal.html">Legal</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+                    <p>&nbsp;</p>
+					<h2>Data and Threat Analysis</h2>
+                    
+                    <h3>surespot stores the following data on its servers:</h3>
+
+                    <ul>
+                        <li>Usernames.</li>
+                        <li>Friend relationships (who is friends with who, blocked who, ignored who, deleted who).</li>
+                        <li>Conversation relationships (how many friends currently you have a "conversation" with - meaning have a sent or
+                            received a message with).
+                        </li>
+                        <li>Messages in the amount of MAX_MESSAGES_PER_USER (currently 1000) which each have a server timestamp, to
+                            username, from username, and encrypted data, or link to encrypted data (image or file).
+                        </li>
+                        <li>Message file data (image or other - anything but plain message text) is stored (encrypted in the same way text
+                            messages are) on rackspace cloud files.
+                        </li>
+                        <li>Total messages sent per user.</li>
+                        <li>Total images sent per user.</li>
+                        <li>Current message count per user. (How many messages they have stored in the database currently, will always be <=
+                            MAX_MESSAGES_PER_USER (currently 1000)).
+                        </li>
+                        <li>Signing (DSA) public keys and versions.</li>
+                        <li>Encryption (DH) public keys and versions.</li>
+                        <li>Encrypted "friend images" or avatars that are assigned to certain usernames. These are encrypted with a key
+                            generated from ECDH key derivation of assigning identity's private/public keypair.
+                        </li>
+                        <li>Google Cloud Messaging(GCM) ID (used for push messaging) which is related to the username in the surespot database.</li>
+                        <li>If voice messaging is purchased, a purchase token given to us by google which is related to the username in the surespot database.</li>
+                        <li>Ip addresses are only logged in the case of rate limit abuses.</li>
+                        <li>Server logs may contain any of the above information and are in a 20 log - 5MB per log rotation.</li>
+                    </ul>
+
+                <h3>Database Exposure.</h3>
+
+                    <p>If an attacker were to obtain access to the surespot database they would have access to the above information. As
+                    surespot does not ask for an email address, phone number, or any other piece of identifying information to create an account
+                    the only pieces of data that could possibly tie a username to a google account or the device being used are the GCM
+                    (google cloud messaging - push notification) ID, or the voice purchase token.
+                    If an attacker were to gain access to both Google's database and surespot's database they could potentially correlate the data.</p>
+
+                    An attacker that gained access to the surespot database server could delete or otherwise corrupt user data,
+                    potentially disrupting the surespot service.
+
+                <h3>Mitigation 1</h3>
+
+                    <p>Any discovery of a user's real identity can be mitigated by using an anonymous email account
+                    to register with Google as well as a pre-paid or no contract phone that has no ties to the user.</p>
+
+                    <p>As another mitigation strategy, an advanced user could compile their own surespot client from source
+                    and prevent a GCM ID from ever uploading to the surespot server and completely remove this threat. This
+                    functionality could easily (and probably will) become a user setting in the client.</p>
+
+                    <p>Even if an attacker were to gain access to all of the data stored in the surespot database there is not a way they could read the
+                    encrypted message data without the user's  private key which resides on their device and is never sent to surespot servers.
+                    Because usernames are completely arbitrary and chosen by the user with no mapping other than to the GCM ID (which is meaningless outside of Google's
+                    database), the surespot database in an attacker's hands represents an anonymous and practically useless dataset.</p>
+
+                    <p>Passwords are stored salted and hashed in the surespot database rendering them useless to an attacker. Even if a user were to expose their password,
+                    without the private key which resides on the device the attacker can do nothing to decrypt a user's messages.</p>
+                    
+                    Regular backups of the database are encrypted using AES-256 and stored offsite.
+
+                <h3>Server exposure</h3>
+
+                    <p>If an attacker were to gain access to a surespot server machine they would have the ability to prevent surespot from
+                    working by changing the server private keys forcing all public key validation to fail on the client. As public keys are cached
+                    when they are verified this would only affect messages generated with keys that have not been cached already.</p>
+
+                    <p>An attacker could perform a MITM attack by creating a new public key pair and signatures for a user which to a client would appear legitimate and thus
+                    enable continuing of a conversation.</p>
+
+                    An attacker would have access to the database and could delete all of the data.
+
+                <h3>Migation 2</h3>
+
+                    <p>While not currently implemented the client side key generation mechanism could be improved to have the client sign the new
+                    public keys with the old private key. This would create a trust chain
+                    going back to the initial key pairs. Any new key presented to a client could be validated against the previous key's
+                    signatures. Because all private key generation occurs on the client, and public keys are cached on the client once validated, a rogue server
+                    would not be able to influence this check.</p>
+
+                    <p>In the event of a server compromise the server could be rebuilt from the database backup in minutes.
+                    New server private keys would be created which would  require an upgrade to the client.</p>
+
+                <h3>Man in the Middle prevention</h3>
+
+                    <p>On top of SSL surespot prevents MITM attacks in the following way.</p>
+
+                    The user creation mechanism in the client generates two ECC 521 bit public/private key pairs, one for encryption and
+                    one for signing. The two public keys are uploaded to the surespot server
+                    along with the desired username and PBKDF derived password. The server then signs the user public keys with its
+                    private key. The client is compiled with the server's public key.
+                    When a message is received the client downloads the sending user's public keys and server signatures. The key signatures are then validated
+                    against the compiled public key and if the validation fails the message cannot be decrypted and the user is told.
+
+                <h3>Identity (private key) backup</h3>
+
+                    <p>Practically, identity (username + private key) backup mechanisms are needed to facilitate the features people expect
+                    from a social network like application. In the event of a lost or stolen phone
+                    one can not expect a user to simply create a new identity and lose
+                    all of the relationships and conversations contained within the application. Hence surespot provides two identity
+                    backup mechanisms which have different threat implications.</p>
+
+                    <ol>
+                        <li>Backing up one's identity to local storage using the "backup identity" feature in surespot is the safest
+                        mechanism. It reduces the key exposure to devices that have physically had the key
+                        copied to them. As long is one as careful to not give the private key to anyone there is minimal threat introduced
+                        here. If an attacker were to gain access to the private key it is stored
+                        encrypted with 256 bit AES-GCM with a key derived from the user's password using a PBKDF, so they would have to know the user's password
+                        also.</li>
+
+                        <li>Backing up one's identity to Google Drive opens up the following threats. The identity
+                        is stored (as above encrypted with 256 bit AES-GCM with a PKBDF key derived from password) on Google Drive's cloud servers.
+                        This means that we cannot control who gets access to this encrypted backup, we are trusting Google to ensure that no-one can access our private keys.
+                        Again as the keys are encrypted, the obtainer of the keys would have to know or brute force the password to do anything with them. This threat
+                        grows if the Google account password and surespot password are the same. For all we know Google could be storing passwords in plain text!
+                        </li>
+                    </ol>
+
+                <h3>Mitigation 3</h3>
+
+                    <p>Ensure google and surespot passwords are completely different, and strong, and use local device identity backup
+                    only if possible.</p>
+
+                <h3>Stored client data</h3>
+
+                    No decrypted message contents are stored on the device filesystem. The user's identity (username plus private keys) is
+                    stored encrypted on the device with 256 bit AES-GCM using a salted key derived from a PBKDF upon the user's password. An
+                    attacker with access to the device  would have to know the user's password to be able to decrypt the private key to generate the shared secret to decrypt
+                    the messages.
+
+                <h3>Caching</h3>
+
+                    Shared secrets are cached in the device memory by a background service that starts when the application is
+                    launched for the first time after the phone is booted.
+                    After a successful login has occurred shared secrets are cached in the device memory and used as needed.
+                    An attacker with physical access to the device that has shared secrets cached could
+                    potentially scan or dump the memory for the secrets and decrypt messages. There is not a lot that can be done to prevent an attacker
+                    getting access to the data they want should this threat scenario occur.
+                    Various protections could be put in place to make this harder but a
+                    determined hacker with device access in this scenario will probably be able to gain access to the information
+                    they seek no matter what precautions are put in place.
+
+
+                <h3>Mitigation 4</h3>
+
+                    <p>Be careful with your device; don't allow root access to unknown apps; don't install malicious software, and don't
+                    let your device fall into the wrong hands.</p>
+
+                    If possible, powering down the phone before a unwanted party gains physical access will
+                    clear this information from the device memory and require login to surespot again to view messages.
+
+                <h3>Login validation, sessions, and web method access</h3>
+
+                    Sessions are created by checking the user's password plus a signature validation of the username, password, and a
+                    random token generated by the client, against the data stored by the server upon creation of the identity. Replay
+                    attacks / session hijacking are prevented by
+                    SSL. If this is deemed to be too insecure, additional security could be implemented with a challenge/response
+                    mechanism as used by the majorly destructive operations described below.<br><br>
+
+                    Because sending and receiving messages that can actually be read requires a private key and validated public key,
+                    a session hijacker without the associated private key would not be able to read any of the
+                    associated encrypted message data, nor send a readable message to a user.
+
+                    A session hijacker would be able to delete messages and images, invite and remove friends (from the list of friends, not actually delete the associated
+                    identities), and
+                    change image unlock state.
+
+                    <p>Majorly destructive operations such as deleting an identity, generating new key pairs, and changing passwords require re-authentication which
+                    includes checking a client signature against a token issued by the server
+                    so could not occur with a hijacked session.</p>
+                    A majorly destructive operation can only be initiated by a client with a valid username and matching private key set so again an attacker
+                    would have
+                    to gain access to the device and know the password to be able to accomplish execution of any of the majorly destructive operations.
+
+                <h3>Encryption strength</h3>
+
+                    All messages and data (images and other files) are encrypted using 256 bit AES-GCM with the shared key derived using
+                    ECDH with 521 bit keys. The shared key is never uploaded to any server or stored physically on the device. It
+                    is only ever generated and stored in device memory. Assuming the private key remains private it would be extremely
+                    hard to decrypt any message sent with surespot today.
+
+                <h3>Lost/Stolen device</h3>
+
+                    In the case of a lost or stolen device there exist the following threats.
+                    As a surespot session lasts 72 hours (we plan on making this user configurable),
+                    the attacker holding a device where surespot has a valid session will be able to open surespot and view any messages.
+
+                <h3>Current Mitigation Strategies</h3>
+
+                    <ol>
+                        <li>A user can manually logout of surespot at any time. They will then have to login to gain access to messages.
+                            This
+                            is not very convenient but it is the most secure option.
+                        </li>
+
+                        <li>Upon realizing that their device is missing a user can restore a backup of their identity to a different device and
+                            generate a new key pair. The existing keys will then be revoked causing
+                            the following effects on the missing device:
+                            If the application is open and running the identity will be logged out
+                            (if it is logged in) and the identity and all associated data will be immediately deleted from the device, and any associated shared secrets removed
+                            from the memory cache. If the application is not open and running, the user will not be able to login to surespot using the revoked identity upon
+                            opening the application the next time.
+                        </li>
+                    </ol>
+                </h2>
+
+                <h3>Rogue clients</h3>
+
+                    There is no way for any software to guarantee the behavior of a client, or that the client is "authentic" and has
+                    not been tampered with in some way. Features such as deleting a message from a remote device, or
+                    deleting a revoked identity depend upon the client obeying the instructions the server sends it. There always exists
+                    the potential for an unsavory user to create or use a hacked or modified client and not perform the expected
+                    actions when asked to by the server. The good news is that there is no way for a rogue client to compromise the
+                    security of a message. In order for a rogue client to engage in a conversation with a legitimate
+                    client, the rogue client would have to abide by the same rules - that is use the same encryption methods, follow the
+                    same key generation procedures, etc., therefore the actual act of encrypted message
+                    exchange would have to be preserved, otherwise no encrypted message exchange could occur. In short put your trust in
+                    the users you are exchanging data with, not in any technology that claims it can control what
+                    a client (rogue or legitimate) does with that data once it has received it.
+
+				</div><!-- /col-lg-12 -->
+			</div><!-- /row -->
+		</div><!-- /container -->
+    </div>
+	
+	
+	
+	<div class="container">
+		<hr>
+		<div class="row centered">
+			<div class="col-lg-2">
+                <i class="fa fa-twitter"></i> <a href="https://twitter.com/surespot">Twitter</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-facebook"></i> <a href="https://facebook.com/surespot">Facebook</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/company/surespot">LinkedIn</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-flag"></i> <a href="https://www.transifex.com/projects/p/surespot/">Transifex</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-github"></i> <a href="https://www.github.com/surespot">GitHub</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-youtube-play"></i> <a href="https://www.youtube.com/user/surespot">YouTube</a>
+			</div>
+		</div><!-- /row -->
+		<hr>
+		<p class="centered"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="assets/img/cc-by-sa.png" alt="cc-by-sa" /></a><br>2013 - 2014 by Surespot.</p>
+	</div><!-- /container -->
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+

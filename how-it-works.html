@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="surespot is an encrypted messenger app for Android and iOS" />
+    <meta name="author" content="surespot" />
+    <meta name="keywords" content="surespot,encrypted,messenger,app,ios,android"  />
+    <meta name="robots" content="index, follow">
+
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>surespot encrypted messenger</title>
+
+    <!-- OpenGraph -->
+    <meta property="og:image" content="http://surespot.me/assets/img/surespot_logo_web.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="surespot Apps"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://surespot.me"/>
+    <meta property="og:site_name" content="surespot encrypted messenger"/>
+    <meta property="og:description" content="surespot is an encrypted messenger app for Android and iOS"/>
+
+    <!-- Bootstrap core and FontAwesome CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img src="assets/img/surespot_icon.png" alt="surespot icon"/> Surespot</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="legal.html">Legal</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-12">
+            <p>&nbsp;</p>
+            
+                <h2>How surespot works</h2>
+
+                Traditional IM (OTT), SMS, etc. communications send messages in "plain text". This means that the information is sent
+                without anything done to protect the information from being read by anyone else. It is akin to sending a postcard.
+                Imagine you are on vacation in Italy, Florence to be precise, and you send a postcard to your sister in London. As
+                the postcard travels anyone that touches it can read it. Typically you do not send information like a credit card
+                number or your pin number or an intimate thought using the postcard format. Today this is what sending an email or
+                a text message or an instant message or a picture is like. The message is the postcard which travels along many hops
+                until it reaches its destination. At every one of these "hops" the message could potentially be read. For example you
+                are reading an email at Starbucks. To read this email the information travels from the server (gmail) through their
+                (Google's) ISP, to Starbuck's ISP, to the Starbucks location you are at. At any one of these points the email can be
+                read. To illustrate this we can run the traceroute command which shows the hops your data is taking to reach its
+                destination. For example the traceroute from my house to <em>mail.google.com</em> looks like this:
+
+                <pre>
+                [Adam@monkey ~]$ traceroute mail.google.com
+                traceroute to mail.google.com (74.125.225.213), 30 hops max, 60 byte packets
+                1 DD-WRT.mugello (192.168.10.1) 0.506 ms 0.598 ms 0.794 ms
+                2 24.9.100.1 (24.9.100.1) 16.723 ms 17.837 ms 32.677 ms
+                3 ge-1-39-sr01.summit.co.denver.comcast.net (68.85.220.81) 17.710 ms 17.711 ms 17.828 ms
+                4 te-0-3-0-5-ar02.denver.co.denver.comcast.net (68.86.179.13) 21.140 ms 22.087 ms 22.145 ms
+                5 pos-0-7-0-0-ar02.aurora.co.denver.comcast.net (68.86.128.246) 25.333 ms 25.334 ms 25.448 ms
+                6 he-3-4-0-0-cr01.denver.co.ibone.comcast.net (68.86.90.149) 24.116 ms 20.657 ms 20.689 ms
+                7 * * *
+                8 173.167.57.206 (173.167.57.206) 17.512 ms 18.328 ms 18.402 ms
+                9 72.14.234.57 (72.14.234.57) 16.190 ms 16.218 ms 16.160 ms
+                10 209.85.251.111 (209.85.251.111) 16.674 ms 20.817 ms 21.715 ms
+                11 den03s06-in-f21.1e100.net (74.125.225.213) 17.238 ms 18.200 ms 18.152 ms
+                </pre>
+
+                We can see that to get to Google's server at <em>mail.google.com</em>, the data is being routed through at least 11 hops,
+                anyone of which could have a chance to intercept the information. Now, if you controlled the routing and could make
+                the data on your network always pass through a certain one of these hops, you could monitor all of the “plain text”
+                data being sent on your network. Not exactly "secure".
+                
+                <h3>So how do we get around this?</h3>
+                You may have seen at times when you used your web browser that the URL was pointing to <em>https://</em> instead of <em>http://</em>
+                and there was an associated padlock icon or similar. This indicates that the connection is being made using
+                <a href="https://en.wikipedia.org/wiki/Secure_Sockets_Layer">SSL or Secure Sockets Layer</a>.
+                This means that the connection from your web browser to the server is encrypting the information.
+                <blockquote>
+                  <p>In cryptography, encryption is the process of encoding messages (or information) in such a way that eavesdroppers
+                     or hackers cannot read it, but that authorized parties can.</p>
+                  <small>--https://en.wikipedia.org/wiki/Cryptography</small>
+                </blockquote>
+                So applying this to our <em>mail.google.com</em> traceroute above, this means that only hop 1 (my computer) and hop 11
+                (Google's server) can see the information, all that hops 2-10 can see is encrypted HTTPS traffic. This is great!
+                There is however still a problem. We have logged onto <em>https://mail.google.com</em> presumably to send an email, which in
+                this case contains a credit card number. So we send the email to <em>Cherie</em> at Hotmail. Now the email which is
+                in plain text is sent from Google's server to the Hotmail server and eventually to the recipient's device, taking a
+                multi-hopped path much like the traceroute above. At this point we no longer have control over how the message is secured.
+                Is Google using SSL to transmit the message to Hotmail? Probably. Is the message downloaded from Hotmail to the recipient's
+                device in a secure manner? Maybe, but how can we be sure? Now extrapolate this example to any information you send on the
+                internet. What is happening to your data when it is on the server or in transit in plain text? How could anyone
+                possibly know? How secure is the server at protecting your plain text data from hackers? What are the guardians of
+                your data doing with your data?
+                
+                <h3>surespot</h3>
+                Surespot solves these problems by using end to end encryption. Whereas SSL can be thought of as client to server
+                encryption where the hops cannot access the plain text but the server can, end to end encryption encrypts the data
+                so that only the end users can decipher it. No one along the network route the message takes from one client to
+                another, not any of the hops, not even the surespot server, can view the contents of the data. Only Adam and Cherie. 
+
+                <h3>How does this work?</h3>
+                <p>Encryption is an electronic lock and key system. You take a plain text message and encrypt it using a key (secret). You can
+                then decrypt the message using the same key. Pretty simple. You encrypt data at one end using the key, send it over
+                all the network's hops and servers, and at the other end it can be read because the key is known. None of the hops
+                and servers in-between can read it because they don't know the key.</p>
+
+                So Adam encrypts a message for Cherie with a key, then Cherie decrypts it using the same key. Simple right, except
+                for the fact that Cherie needs to know the key! Somehow we need to get the key to Cherie but how can we send it over
+                the network? We can't encrypt it because we need a key to encrypt so we have a catch 22. Or a chicken and egg situation.
+                The answer is we don't send the key over the network. Well not the key we're using to encrypt the messages at least. <br>
+
+                <h3>Public key encryption</h3>
+                When a user is created in surespot an associated key pair is generated. A key pair consists of a public key and a
+                private key. These keys allow us to do magical things. So now Adam has a key pair and Cherie has a key pair.
+                The private key is stored on your device, the surespot server does not need and never will have access to it.
+                The public key is given to the user that you wish to exchange messages with. So surespot ensures that Adam gives
+                Cherie his public key and Cherie gives Adam her public key. Now the brilliance of shared key derivation can shine.
+                The key pair algorithm that surespot is using allows the following mathematics to happen: Adam can now take Cherie's
+                public key and with his private key can derive a secret. Cherie takes Adam's public key and with her private key
+                <em>derives the same secret!</em> Re-read that part a few times. This shared secret is unique to Adam and Cherie, only they
+                know - and assuming their private keys remain private - only they will ever know. This shared secret has never been
+                and never will be exposed to the surespot server or any other hops along the network route that the message takes.
+                This shared secret can now be used to exchange information securely. This is the crux of what makes surespot work. <br>
+
+                <h3>Technical overview</h3>
+
+                <h5>- User creation -</h5>
+                <p>When a user is created in surespot two ECC (secp521) key pairs are generated, one for key
+                derivation, and one for signing.</p>
+                
+                The username plus keypairs create a 'surespot identity'. This identity is stored on the device symmetrically
+                encrypted using 256 bit AES-GCM with a PKCS5S2 key derived from the user's password (plus salt and other data).
+                The public keys are uploaded to the server where they are signed by the server using the server's private key.
+                A user may create multiple identities and switch between them at will.
+
+                <h5>- User authentication -</h5>
+                <p>To login the client generates a signature using the identity's private signing key against
+                the username, password, and randomly generated data. The server validates the client provided username,
+                password, and aforementioned signature against its stored public signing key for the identity in question.
+                If successfully verified the client is issued a session cookie which authenticates them for future requests until
+                the session expires or they logout.</p>
+
+                As the exchange occurs over SSL, session cookies are thought to be a secure enough mechanism to facilitate
+                authentication, but in the future every request could be validated against the signature. The fact that messages
+                could not be decrypted by a session hijacker given the end to end encryption nature of the system also factors into this decision.
+
+                <h5>- Identity backup/restore -</h5>
+                As the private key stored on the device is the key to unlocking all of the data,
+                it is of utmost importance. In the case of a lost or stolen device, if the key is lost along with it, so is all
+                of the data. Identity backup/restore and key versioning help to mitigate this problem. A user may backup their
+                (encrypted) identities (username and key pair history) to device storage, or the cloud and restore them upon demand.
+                Obviously the security is only as strong as the password used to store the identity in whatever cloud service and
+                the surespot password, so make them strong! Never shall a private key be stored on a surespot server.
+
+                <h5>- Man in the middle -</h5> 
+                MITM is currently thwarted by the following:
+
+               <ul align="left">
+                    <li>standard SSL implementation.</li>
+                    <li>When a user is created and its public keys uploaded to the server, the server signs the public keys.
+                        Clients that download the public key then validate the signature of the key against the hardcoded server public
+                        key in the client. This ensures a MITM attack trying to use a rogue key pair to impersonate a user will be prevented.
+                    </li>
+                </ul>
+
+                <h5>- Key versioning/revoking -</h5>
+
+                A user may generate a new pair of key pairs at any time. This process is as follows:
+
+                <ul align="left">
+                    <li>the user requests a “key token” from the server</li>
+                    <li>the user generates a new pair of key pairs and uploads them to the server along with an authentication signature
+                        (username, password, random) and a token signature (the received key token, password) generated by the identity's existing signing private key.
+                    </li>
+                    <li>the server validates the password and both signatures and if valid increments the “key version” and signs and stores the public keys in the
+                        database.
+                    </li>
+                    <li>the server notifies other users involved in conversations with the revoker that the key has been revoked.</li>
+                    <li>clients will receive this revoke notification and act accordingly.</li>
+                    <li>the old keys are now considered revoked and any message sent using them will be rejected by the server.</li>
+                </ul>
+
+                <h5>- Use case: lost/stolen phone -</h5>
+                <ul align="left">
+                    <li>Adam lost his phone, luckily he has his identities backed up on Google drive</li>
+                    <li>Adam buys a new phone and installs surespot</li>
+                    <li>Adam restores his identities from the backup</li>
+                    <li>Adam generates a new pair of key pairs successfully</li>
+                    <li>attacker with old phone receives revoke message</li>
+                    <li>old phone knows revoke message is from the same user and promptly logs out and deletes any related data</li>
+                    <li>any subsequent authentication attempts on old phone will be rejected</li>
+                </ul>
+
+                <h5>- Sending a message -</h5>
+                After two users invite then accept each other the users are now friends, the two friends can
+                access each other's public keys, which allows key derivation and message exchange. The scenario plays out as follows at a high level glance:
+
+                <ul align="left">
+                <li>Adam wants to send Cherie a message</li>
+                <li>Adam asks the server for the latest version of Cherie's public key</li>
+                <li>Adam verifies Cherie's public key (which is signed by the server) against the hard coded server public key in the app and proceeds if valid</li>
+                <li>Adam derives the shared secret</li>
+                <li>Adam encrypts the message using AES 256bit GCM using the derived shared secret as the key and sends it to Cherie,
+                    the to and from key version used to generate the message are included as part of the message
+                </li>
+                <li>Cherie receives the encrypted message</li>
+                <li>Cherie downloads and verifies the version of Adam's public key needed to derive the shared secret for the message</li>
+                <li>Cherie derives the (same) shared secret</li>
+                <li>Cherie decrypts the message using the shared secret</li>
+                </ul>
+
+                <h5>Data stored on device-</h5>
+                surespot ensures that no message data or keys are stored on the device an unencrypted fashion.
+                This means that even if someone has your device they will not be able to get the information without knowing your password.
+                Users will be prompted to create a secure password upon creating an identity. 
+
+                <h3>Tech used in surespot</h3>
+
+                <h5>- Server -</h5>
+                <ul align="left">
+                <li>Web application server is running on node.js, written in CoffeeScript</li>
+                <li>RESTful JSON API</li>
+                <li>Chat implementation utilizes Socket IO (websocket + chat rooms)</li>
+                <li>Linux servers</li>
+                <li>Redis and Cassandra databases</li>
+                <li>Encrypted data files are stored on rackspace cloudfiles and delivered via the Akamai CDN.</li>
+                </ul>
+
+                <h5>- Clients -</h5>
+                <ul align="left">
+                    <li>Android V. 2.3 thru 4.4 supported</li>
+                    <li>iOS 6+ supported</li>
+                    <li>Socket IO for real-time updates while app is open</li>
+                    <li>GCM notifications, for invites, invite accepts and new messages (sound, LED and vibrate notification configurable)</li>
+                    <li>HTTP caching implementation to reduce bandwidth usage and increase responsiveness</li>
+                    <li>All cached message contents and users private keys reside on the device in an encrypted state and can only be decrypted with a password</li>
+                </ul>
+
+                <h3>Open Source</h3>
+                surespot is 100% open source this means that anyone on the planet can review the source code and find flaws.
+                When you have an entire planet looking at the source code you can be assured that the implementation is highly
+                scrutinized and proven. This means that surespot does exactly what it says it does, there can be no back doors
+                or pilfering of any information. As no person can say that a system is 100% secure, please be careful. There might be security flaws
+                and backdoors in other apps you installed or even your operating system.
+			</div>
+		</div><!-- /row -->
+	</div><!-- /container -->
+	
+	<div class="container">
+		<hr>
+		<div class="row centered">
+			<div class="col-lg-2">
+                <i class="fa fa-twitter"></i> <a href="https://twitter.com/surespot">Twitter</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-facebook"></i> <a href="https://facebook.com/surespot">Facebook</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/company/surespot">LinkedIn</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-flag"></i> <a href="https://www.transifex.com/projects/p/surespot/">Transifex</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-github"></i> <a href="https://www.github.com/surespot">GitHub</a>
+			</div>
+			<div class="col-lg-2">
+                <i class="fa fa-youtube-play"></i> <a href="https://www.youtube.com/user/surespot">YouTube</a>
+			</div>
+		</div><!-- /row -->
+		<hr>
+		<p class="centered"><a href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="assets/img/cc-by-sa.png" alt="cc-by-sa" /></a><br>2013 - 2014 by Surespot.</p>
+	</div><!-- /container -->
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
