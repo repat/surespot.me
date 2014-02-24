@@ -156,3 +156,7 @@ i {
 pre {
     text-align:left;
 }
+
+ul.leftalign {
+    text-align:left;
+}

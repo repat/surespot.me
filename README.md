@@ -2,6 +2,9 @@ surespot.me
 ======
 This is my proposal for a new, more structured [surespot.me](http://surespot.me) website.
 
+## Preview
+[http://repat.de/surespot.me/](http://repat.de/surespot.me/index.html)
+
 ## Technology
 * [jQuery](http://jquery.com) 1.10.2
 * [Bootstrap](http://getbootstrap.com) 3.0.3
@@ -18,7 +21,7 @@ This is my proposal for a new, more structured [surespot.me](http://surespot.me)
 * Link to YouTube profile
 * CEO/CTO + Tel#
 * New, actual review with actual links to them
-* No HTML errors
+* [No HTML errors](http://validator.w3.org/check?uri=http%3A%2F%2Frepat.de%2Fsurespot.me%2Findex.html&charset=%28detect+automatically%29&doctype=Inline&group=0) (ok, one, the studpid `apple-itunes-app`)
 * Questionmark guy for inviting people to contribute
 
 ## License
