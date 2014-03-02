@@ -2,6 +2,8 @@ surespot.me
 ======
 This is my proposal for a new, more structured [surespot.me](http://surespot.me) website.
 
+*update:* They updated their website on march 1st 2014. As far as I know, this wasn't used at all. I leave it online as an example.
+
 ## Preview
 [http://repat.de/surespot.me/](http://repat.de/surespot.me/index.html)
 
@@ -25,9 +27,7 @@ This is my proposal for a new, more structured [surespot.me](http://surespot.me)
 * Questionmark guy for inviting people to contribute
 
 ## License
-* [Beerware](https://en.wikipedia.org/wiki/Beerware). I'm German after all ;-)
-
-No seriouly, do whatever you want with this.
+Do whatever you want with this.
 
 ## Contact
 * http://repat.de
