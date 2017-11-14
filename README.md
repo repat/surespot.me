@@ -4,9 +4,6 @@ This is my proposal for a new, more structured [surespot.me](http://surespot.me)
 
 *update:* They updated their website on march 1st 2014. As far as I know, this wasn't used at all. I leave it online as an example.
 
-## Preview
-[http://repat.de/surespot.me/](http://repat.de/surespot.me/index.html)
-
 ## Technology
 * [jQuery](http://jquery.com) 1.10.2
 * [Bootstrap](http://getbootstrap.com) 3.0.3
@@ -23,7 +20,7 @@ This is my proposal for a new, more structured [surespot.me](http://surespot.me)
 * Link to YouTube profile
 * CEO/CTO + their Facebook + Tel#
 * New, actual review with actual links to them
-* [No HTML errors](http://validator.w3.org/check?uri=http%3A%2F%2Frepat.de%2Fsurespot.me%2Findex.html&charset=%28detect+automatically%29&doctype=Inline&group=0) (ok, one, the stupid `apple-itunes-app`)
+* No HTML errors
 * Questionmark guy for inviting people to contribute
 
 ## License
